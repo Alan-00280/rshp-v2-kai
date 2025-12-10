@@ -48,7 +48,7 @@
                         <button type="button" class="btn btn-sm btn-danger" onclick="if(confirm('Apakah Anda yakin ingin menghapus ras hewan ini?')) { document.getElementById('delete-form-{{ $hewan->idras_hewan }}').submit(); }">
                             <i class="fas fa-trash"></i> Hapus
                         </button>
-                        <form id="delete-form-{{ $hewan->idras_hewan }}" action="#" method="POST" style="display: none;">
+                        <form id="delete-form-{{ $hewan->idras_hewan }}" action="{{ route('admin.ras-hewan.delete', ['id' => $hewan->idras_hewan]) }}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
                         </form>     
