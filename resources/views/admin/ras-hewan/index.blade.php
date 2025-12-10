@@ -28,7 +28,7 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $hewan->nama_ras }}</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-warning" onclick="window.location='{{ route('admin.ras-hewan.edit', $hewan->nama_ras) }}'">
+                        <button type="button" class="btn btn-sm btn-warning" onclick="window.location='{{ route('admin.ras-hewan.edit', ['id' => $hewan->idras_hewan]) }}'">
                             <i class="fas fa-edit"></i> Edit
                         </button>
                         <button type="button" class="btn btn-sm btn-danger" onclick="if(confirm('Apakah Anda yakin ingin menghapus ras hewan ini?')) { document.getElementById('delete-form-{{ $hewan->idras_hewan }}').submit(); }">

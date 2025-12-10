@@ -106,7 +106,12 @@ class RasHewanController extends Controller
             ->where('idras_hewan', $id)
             ->first();
 
-        return view('admin.ras-hewan.edit', ['RasHewan' => $rasHewan]);
+        $jenisHewans = DB::table('jenis_hewan')->get(['*']);
+
+        return view('admin.ras-hewan.edit', [
+            'rasHewan' => $rasHewan,
+            'jenisHewans' => $jenisHewans
+        ]);
     }
     // update function
     public function update(Request $request, $id)

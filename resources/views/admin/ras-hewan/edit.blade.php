@@ -1,4 +1,5 @@
 <x-teemplate title="Edit Ras Hewan - RSHP UNAIR">
+{{-- @dd($rasHewan) --}}
 <div class="mt-20">
     <div class="container mx-auto max-w-2xl">
         <h1 class="text-center font-bold text-3xl mb-10">Edit Ras Hewan</h1>
@@ -29,7 +30,7 @@
                     <input type="text" 
                            id="nama_ras_hewan"
                            name="nama_ras_hewan"
-                           value="{{ old('nama_ras_hewan', $rasHewan->nama_ras_hewan) }}"
+                           value="{{ old('nama_ras_hewan', $rasHewan->nama_ras) }}"
                            placeholder="Masukkan nama ras hewan"
                            class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 @error('nama_ras_hewan') border-red-500 @enderror"
                            required>
