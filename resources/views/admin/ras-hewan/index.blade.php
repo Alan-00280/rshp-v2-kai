@@ -1,8 +1,17 @@
 <x-teemplate title="Manajemen Ras Hewan - RSHP UNAIR">
-    
+
     <div class="page-container">
         <div class="page-header">
-            <h1>Manajemen Ras Hewan</h1>
+            <h1>Manajemen Data Ras Hewan</h1>
+        </div>
+
+        <div class="mb-3">
+            <!-- Tombol untuk tambah kategori klinis baru -->
+            <form action="{{ route('admin.ras-hewan.create') }}" method="GET" style="display: inline;">  
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah Ras Hewan Baru
+                </button>
+            </form>
         </div>
 
         <table class="data-table">
@@ -18,11 +27,23 @@
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $hewan->nama_ras }}</td>
-                    <td>{{-- Placeholder untuk tombol Edit/Hapus --}}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-warning" onclick="window.location='{{ route('admin.ras-hewan.edit', $hewan->nama_ras) }}'">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="if(confirm('Apakah Anda yakin ingin menghapus ras hewan ini?')) { document.getElementById('delete-form-{{ $hewan->idras_hewan }}').submit(); }">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                        <form id="delete-form-{{ $hewan->idras_hewan }}" action="#" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>     
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+</div>
 <style>
         .page-container { max-width: 800px; margin: 30px auto; padding: 20px; }
         .page-header { text-align: center; margin-bottom: 20px; }
@@ -38,5 +59,5 @@
         .alert { padding: 15px; margin-bottom: 20px; border-radius: 5px; }
         .alert-success { background-color: #d4edda; color: #155724; }
         .alert-error { background-color: #f8d7da; color: #721c24; }
-    </style>
+</style>
 </x-teemplate>

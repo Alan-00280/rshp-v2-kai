@@ -1,36 +1,61 @@
 <x-teemplate title="Manajemen Jenis Hewan - RSHP UNAIR">
-    <div class="page-container">
-        <table border="1" cellpadding="8" cellspacing="0">
+
+<div class="mb-3">
+    <form action="{{ route('admin.jenis-hewan.create') }}" method="GET">
+        <button 
+            type="submit" 
+            class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-4 py-2 rounded-md shadow transition"
+        >
+            <i class="fas fa-plus"></i> 
+            Tambah Jenis Hewan
+        </button>
+    </form>
+</div>
+  
+
+
+<div class="page-container p-6">
+    <div class="overflow-x-auto rounded-lg shadow-lg">
+        <table class="min-w-full bg-white border border-gray-200">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nama Jenis Hewan</th>
-                    <th>Aksi</th>
+                <tr class="bg-gray-100 text-left text-gray-700 uppercase text-sm tracking-wider">
+                    <th class="py-3 px-4 border-b">ID</th>
+                    <th class="py-3 px-4 border-b">Nama Jenis Hewan</th>
+                    <th class="py-3 px-4 border-b text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($jenisHewan as $index => $hewan)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $hewan->nama_jenis_hewan }}</td>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-2 px-4 border-b">{{ $index + 1 }}</td>
+                    <td class="py-2 px-4 border-b">{{ $hewan->nama_jenis_hewan }}</td>
+                    <td class="py-2 px-4 border-b text-center space-x-2">
+                        <button 
+                            type="button" 
+                            class="inline-flex items-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-semibold py-1 px-3 rounded transition"
+                            onclick="window.location='#'"
+                        >
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+
+                        <button 
+                            type="button" 
+                            class="inline-flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white text-xs font-semibold py-1 px-3 rounded transition"
+                            onclick="if(confirm('Apakah Anda yakin ingin menghapus jenis hewan ini?')) { document.getElementById('delete-form-{{ $hewan->idjenis_hewan }}').submit(); }"
+                        >
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+
+                        <form id="delete-form-{{ $hewan->idjenis_hewan }}" action="#" method="POST" class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-<style>
-        .page-container { max-width: 800px; margin: 30px auto; padding: 20px; }
-        .page-header { text-align: center; margin-bottom: 20px; }
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .data-table th, .data-table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        .data-table th { background-color: #6588e8; color: white; }
-        .action-link { color: #e74c3c; text-decoration: none; font-weight: bold; }
-        .form-container { background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 20px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; }
-        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; }
-        .btn-submit { background-color: #2ecc71; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
-        .alert { padding: 15px; margin-bottom: 20px; border-radius: 5px; }
-        .alert-success { background-color: #d4edda; color: #155724; }
-        .alert-error { background-color: #f8d7da; color: #721c24; }
-    </style>
+    </div>
+</div>
+
 </x-teemplate>

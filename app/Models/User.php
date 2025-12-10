@@ -32,6 +32,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $table = 'user';
+    public $timestamps = false;
     protected $primaryKey = 'iduser';
     protected $fillable = [
         'nama',
@@ -61,9 +62,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // public function getNameAttribute()
+    // {
+    //     return $this->nama;
+    // } ga ngaruh soalnya udh bener di database
 
     public function pemilik()
     {
         return $this->hasOne(Pemilik::class, 'iduser', 'iduser');
+    }
+    
+    public function roleUser()
+    {
+        return $this->hasMany(RoleUser::class, 'iduser', 'iduser');
     }
 }

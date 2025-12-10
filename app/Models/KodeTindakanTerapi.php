@@ -16,4 +16,7 @@ class KodeTindakanTerapi extends Model
     {
         return $this->hasMany(Hewan::class, 'idkode_tindakan_terapi', 'idkode_tindakan_terapi');
     }
+
+    // mematikan created_at dan updated_at
+    public $timestamps = false;
 }

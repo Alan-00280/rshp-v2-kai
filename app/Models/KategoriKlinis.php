@@ -17,4 +17,6 @@ class KategoriKlinis extends Model
     {
         return $this->hasMany(Hewan::class, 'idkategori_klinis');
     }
+    // mematikan created_at dan updated_at
+    public $timestamps = false;
 }

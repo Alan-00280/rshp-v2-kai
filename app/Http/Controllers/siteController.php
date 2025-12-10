@@ -25,7 +25,7 @@ class siteController extends Controller
     public function cekKoneksi()
     {
         try {
-            \DB::connection()->getPdo();
+            DB::connection()->getPdo();
             return "Koneksi database berhasil!";
         } catch (\Exception $e) {
             return "Gagal terkoneksi ke database: " . $e->getMessage();

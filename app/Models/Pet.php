@@ -19,4 +19,7 @@ class Pet extends Model
     {
         return $this->belongsTo(RasHewan::class, 'idras_hewan', 'idras_hewan');
     }
+    // mematikan created_at dan updated_at
+    public $timestamps = false;
+    
 }

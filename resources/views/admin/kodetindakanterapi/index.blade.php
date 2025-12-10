@@ -1,8 +1,16 @@
 <x-teemplate title="Manajemen Kode Tindakan Terapi - RSHP UNAIR">
+
+
     <div class="page-container">
         <h1>Manajemen Data Kode Tindakan Terapi</h1>
-        {{-- Placeholder untuk tombol 'Tambah Baru' --}}
-        <p><a href="#" class="btn btn-primary">Tambah Kode Tindakan Baru</a></p>
+        <div class="mb-3">
+            <!-- Tombol untuk tambah kategori klinis baru -->
+            <form action="{{ route('admin.kodetindakanterapi.create') }}" method="GET" style="display: inline;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah Kode Tindakan Baru
+                </button>
+            </form>
+        </div>
 
         <table border="1" cellpadding="8" cellspacing="0">
             <thead>
@@ -10,7 +18,6 @@
                     <th>NO</th>
                     <th>Kode Tindakan</th>
                     <th>Deskripsi Tindakan</th>
-                    <th>Biaya Tindakan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -21,14 +28,20 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $item->kode }}</td>
                     <td>{{ $item->deskripsi_tindakan_terapi }}</td>
-                    <td>Rp {{ number_format($item->biaya_tindakan, 2, ',', '.') }}</td>
                     <td>
-                        {{-- Placeholder untuk tombol aksi Edit/Delete --}}
+                        <button type="button" class="btn btn-sm btn-warning" onclick="window.location='#'">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="if(confirm('Apakah Anda yakin ingin menghapus kode tindakan ini?')) { document.getElementById('delete-form-{{ $item->idkode_tindakan_terapi }}').submit(); }">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                        <form id="delete-form-{{ $item->idkode_tindakan_terapi }}" action="#" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </td>
                 </tr>
-                @empty
-                <tr><td colspan="5" style="text-align: center;">Tidak ada data kode tindakan terapi.</td></tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>

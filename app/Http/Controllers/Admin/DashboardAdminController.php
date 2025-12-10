@@ -1,14 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserRoleController extends Controller
+class DashboardAdminController extends Controller
 {
     public function index()
     {
-        return view('admin.role-user.index');
+        return view('admin.dashboard-admin');
     }
 }

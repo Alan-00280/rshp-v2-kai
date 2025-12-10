@@ -1,5 +1,4 @@
-<x-teemplate title="Home - RSHP Unair">
-    <!--<x-nav/> karena gaada perubahan maka makenya single tag -->
+<x-template-home title="Home - RSHP Unair">
     <div class="sub-header">    
            <li><a href="#unair">UNAIR</a></li> | 
             <li><a href="#fkh unair">FKH UNAIR</a></li>| 
@@ -68,4 +67,4 @@
     </footer>
 
     </body>
-</x-teemplate>
+</x-template-home>
