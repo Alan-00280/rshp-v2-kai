@@ -1,21 +1,33 @@
 <x-teemplate title="Manajemen Jenis Hewan - RSHP UNAIR">
 
-<div class="mb-3">
-    <form action="{{ route('admin.jenis-hewan.create') }}" method="GET">
-        <button 
-            type="submit" 
-            class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-4 py-2 rounded-md shadow transition"
-        >
-            <i class="fas fa-plus"></i> 
-            Tambah Jenis Hewan
-        </button>
-    </form>
-</div>
-  
+<div class="page-container">
+        <div class="page-header">
+            <h1>Manajemen Data Jenis Hewan</h1>
+        </div>
 
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
 
-<div class="page-container p-6">
-    <div class="overflow-x-auto rounded-lg shadow-lg">
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
+        @endif
+
+        <div class="mb-3">
+            <!-- Tombol untuk tambah anu -->
+            <form action="{{ route('admin.jenis-hewan.create') }}" method="GET">
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah Jenis Hewan
+                </button>
+            </form>
+        </div>
+
         <table class="min-w-full bg-white border border-gray-200">
             <thead>
                 <tr class="bg-gray-100 text-left text-gray-700 uppercase text-sm tracking-wider">
@@ -33,7 +45,7 @@
                         <button 
                             type="button" 
                             class="inline-flex items-center gap-1 bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-semibold py-1 px-3 rounded transition"
-                            onclick="window.location='#'"
+                            onclick="window.location='{{ route('admin.jenis-hewan.edit', ['id' => $hewan->idjenis_hewan]) }}'"
                         >
                             <i class="fas fa-edit"></i> Edit
                         </button>
@@ -55,7 +67,22 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
 </div>
+<style>
+        .page-container { max-width: 800px; margin: 30px auto; padding: 20px; }
+        .page-header { text-align: center; margin-bottom: 20px; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .data-table th, .data-table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        .data-table th { background-color: #6588e8; color: white; }
+        .action-link { color: #e74c3c; text-decoration: none; font-weight: bold; }
+        .form-container { background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; }
+        .btn-submit { background-color: #2ecc71; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+        .alert { padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .alert-success { background-color: #d4edda; color: #155724; }
+        .alert-error { background-color: #f8d7da; color: #721c24; }
+</style>
 
 </x-teemplate>

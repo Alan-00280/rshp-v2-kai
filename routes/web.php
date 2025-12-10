@@ -23,17 +23,22 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('isAdministrator')->group(function(){
     
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardAdminController::class, 'index'])->name('admin.dashboard');
+
+    //? JENIS HEWAN ?//
     Route::get('/admin/jenis-hewan', [App\Http\Controllers\Admin\JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
     Route::get('/admin/jenis-hewan/create', [App\Http\Controllers\Admin\JenisHewanController::class, 'create'])->name('admin.jenis-hewan.create');
     Route::post('/admin/jenis-hewan/store', [App\Http\Controllers\Admin\JenisHewanController::class, 'store'])->name('admin.jenis-hewan.store');
+    Route::get('/admin/jenis-hewan/{id}/edit', [App\Http\Controllers\Admin\JenisHewanController::class, 'edit'])->name('admin.jenis-hewan.edit');
+    Route::patch('/admin/jenis-hewan/{id}/update', [App\Http\Controllers\Admin\JenisHewanController::class, 'update'])->name('admin.jenis-hewan.patch');
     Route::delete('/admin/jenis-hewan/{id}', [App\Http\Controllers\Admin\JenisHewanController::class, 'destroy'])->name('admin.jenis-hewan.delete');
 
+    //? PEMILIIK ?//
     Route::get('/admin/pemilik', [App\Http\Controllers\Admin\PemilikController::class, 'index'])->name('admin.pemilik.index');
     Route::get('/admin/pemilik/create', [App\Http\Controllers\Admin\PemilikController::class, 'create'])->name('admin.pemilik.create');
     Route::post('/admin/pemilik/store', [App\Http\Controllers\Admin\PemilikController::class, 'store'])->name('admin.pemilik.store');
     Route::delete('/admin/pemilik/{id}', [App\Http\Controllers\Admin\PemilikController::class, 'destroy'])->name('admin.pemilik.delete');
 
-
+    //? RAS HWAN ?//
     Route::get('/admin/ras-hewan', [App\Http\Controllers\Admin\RasHewanController::class, 'index'])->name('admin.ras-hewan.index');
     Route::get('/admin/ras-hewan/create', [App\Http\Controllers\Admin\RasHewanController::class, 'create'])->name('admin.ras-hewan.create');
     Route::post('/admin/ras-hewan/store', [App\Http\Controllers\Admin\RasHewanController::class, 'store'])->name('admin.ras-hewan.store');
@@ -41,35 +46,38 @@ Route::middleware('isAdministrator')->group(function(){
     Route::put('/admin/ras-hewan/{id}', [App\Http\Controllers\Admin\RasHewanController::class, 'update'])->name('admin.ras-hewan.update');
     Route::delete('/admin/ras-hewan/{id}', [App\Http\Controllers\Admin\RasHewanController::class, 'destroy'])->name('admin.ras-hewan.delete');
 
-    
+    //? KATEGORI ?//
     Route::get('/admin/kategori', [App\Http\Controllers\Admin\KategoriController::class, 'index'])->name('admin.kategori.index');
     Route::get('/admin/kategori/create', [App\Http\Controllers\Admin\KategoriController::class, 'create'])->name('admin.kategori.create');
     Route::post('/admin/kategori/store', [App\Http\Controllers\Admin\KategoriController::class, 'store'])->name('admin.kategori.store');
     Route::delete('/admin/kategori/{id}', [App\Http\Controllers\Admin\KategoriController::class, 'destroy'])->name('admin.kategori.delete');
 
+    //? KATEGORI KLINIS ?//
     Route::get('/admin/kategori-klinis', [App\Http\Controllers\Admin\KategoriKlinisController::class, 'index'])->name('admin.kategoriklinis.index');
     Route::get('/admin/kategori-klinis/create',[App\Http\Controllers\Admin\KategoriKlinisController::class, 'create'])->name('admin.kategoriklinis.create');
     Route::post('/admin/kategori-klinis/store',[App\Http\Controllers\Admin\KategoriKlinisController::class, 'store'])->name('admin.kategoriklinis.store');
     Route::delete('/admin/kategori-klinis/{id}', [App\Http\Controllers\Admin\KategoriKlinisController::class, 'destroy'])->name('admin.kategoriklinis.delete');
 
-
+    //? KODE TINDAKAN TERAPI ?//
     Route::get('/admin/kode-tindakan-terapi', [App\Http\Controllers\Admin\KodeTindakanTerapiController::class, 'index'])->name('admin.kodetindakanterapi.index');
     Route::get('/admin/kode-tindakan-terapi/create', [App\Http\Controllers\Admin\KodeTindakanTerapiController::class, 'create'])->name('admin.kodetindakanterapi.create');
     Route::post('/admin/kode-tindakan-terapi/store',[App\Http\Controllers\Admin\KodeTindakanTerapiController::class, 'store'])->name('admin.kodetindakanterapi.store');
     Route::delete('/admin/kode-tindakan-terapi/{id}', [App\Http\Controllers\Admin\KodeTindakanTerapiController::class, 'destroy'])->name('admin.kodetindakanterapi.delete');
 
+    //? PET ?//
     Route::get('/admin/pet', [App\Http\Controllers\Admin\PetController::class, 'index'])->name('admin.pet.index');
     Route::get('/admin/pet/create', [App\Http\Controllers\Admin\PetController::class, 'create'])->name('admin.pet.create');
     Route::post('/admin/pet/store', [App\Http\Controllers\Admin\PetController::class, 'store'])->name('admin.pet.store');
     Route::delete('/admin/pet/{id}', [App\Http\Controllers\Admin\PetController::class, 'destroy'])->name('admin.pet.delete');
 
-
+    //? ROLE ?//
     Route::get('/admin/role', [App\Http\Controllers\Admin\RoleController::class, 'index'])->name('admin.role.index');
     Route::get('/admin/role/create', [App\Http\Controllers\Admin\RoleController::class, 'create'])->name('admin.role.create');
     Route::post('/admin/role/store', [App\Http\Controllers\Admin\RoleController::class, 'store'])->name('admin.role.store');
     Route::delete('/admin/role/{id}', [App\Http\Controllers\Admin\RoleController::class, 'destroy'])->name('admin.role.delete');
     Route::resource('/admin/role', App\Http\Controllers\Admin\RoleController::class)->names('admin.role');
 
+    //? ROLE USER ?//
     Route::get('/admin/role-user', [App\Http\Controllers\Admin\RoleUserController::class, 'index'])->name('admin.roleuser.index');
     Route::get('/admin/role-user/create', [App\Http\Controllers\Admin\RoleUserController::class, 'create'])->name('admin.roleuser.create');
     Route::post('/admin/role-user/store', [App\Http\Controllers\Admin\RoleUserController::class, 'store'])->name('admin.roleuser.store');

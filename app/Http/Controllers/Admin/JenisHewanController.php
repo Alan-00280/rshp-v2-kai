@@ -37,6 +37,39 @@ class JenisHewanController extends Controller
         return redirect()->route('admin.jenis-hewan.index')
                         ->with('success', 'Jenis hewan berhasil ditambahkan.');
     }
+    public function edit(Request $request, $id) {
+        return view('admin.jenis-hewan.edit', [
+            'jenisHewan' => DB::table('jenis_hewan')->where('idjenis_hewan', $id)->first()
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        //? validasi input
+        $validatedData = $this->validateJenisHewan($request, $id);
+
+        try {
+            // Eloquent
+            // $rasHewan = RasHewan::findOrFail($id);
+            // $rasHewan->nama_ras = $this->formatNamaRasHewan($validatedData['nama_ras']);
+            // $rasHewan->idjenis_hewan = $validatedData['idjenis_hewan'];
+            // $rasHewan->save();
+
+            // Query Builder
+            DB::table('jenis_hewan')
+                ->where('idjenis_hewan', $id)
+                ->update([
+                    'nama_jenis_hewan' => $this->formatNamaJenisHewan($validatedData['nama_jenis_hewan'])
+                ]);
+
+            return redirect()->route('admin.jenis-hewan.index')
+                            ->with('success', 'Jenis hewan berhasil diperbarui.');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->route('admin.ras-hewan.edit', $id)
+                            ->with('error', 'Gagal memperbarui Jenis hewan: ' . $e->getMessage())
+                            ->withInput();
+        }
+    }
 
     protected function validateJenisHewan(Request $request, $id = null)
     {

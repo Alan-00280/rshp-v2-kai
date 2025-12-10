@@ -1,8 +1,10 @@
-<x-teemplate title="Edit Ras Hewan - RSHP UNAIR">
+<x-teemplate title="Edit Jenis Hewan - RSHP UNAIR">
 {{-- @dd($rasHewan) --}}
 <div class="mt-20">
     <div class="container mx-auto max-w-2xl">
-        <h1 class="text-center font-bold text-3xl mb-10">Edit Ras Hewan</h1>
+        <h1 class="text-center font-bold text-3xl mb-10">Edit Jenis Hewan</h1>
+
+        <x-logger :object="$jenisHewan" />
         
         <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             @if ($errors->any())
@@ -29,42 +31,24 @@
             </div>
             @endif
 
-            <form action="{{ route('admin.ras-hewan.update', $rasHewan->idras_hewan) }}" method="POST">
+            
+
+            <form action="{{ route('admin.jenis-hewan.patch', ['id' => $jenisHewan->idjenis_hewan]) }}" method="POST">
                 @csrf
-                @method('PUT')
+                @method('PATCH')
                 
                 <div class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="nama_ras">
                         Nama Ras Hewan <span class="text-red-500">*</span>
                     </label>
                     <input type="text" 
-                           id="nama_ras"
-                           name="nama_ras"
-                           value="{{ old('nama_ras_hewan', $rasHewan->nama_ras) }}"
-                           placeholder="Masukkan nama ras hewan"
+                           id="nama_jenis_hewan"
+                           name="nama_jenis_hewan"
+                           value="{{ old('nama_jenis_hewan', $jenisHewan->nama_jenis_hewan) }}"
+                           placeholder="Masukkan nama jenis hewan"
                            class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 @error('nama_ras_hewan') border-red-500 @enderror"
                            required>
-                    @error('nama_ras_hewan')
-                        <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
-                    @enderror 
-                </div>
-
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="idjenis_hewan">
-                        Jenis Hewan <span class="text-red-500">*</span>
-                    </label>
-                    <select id="idjenis_hewan" 
-                            name="idjenis_hewan" 
-                            class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 @error('idjenis_hewan') border-red-500 @enderror" 
-                            required>
-                        <option value="">-- Pilih Jenis Hewan --</option>
-                        @foreach($jenisHewans as $jenis)
-                            <option value="{{ $jenis->idjenis_hewan }}" {{ (old('idjenis_hewan', $rasHewan->idjenis_hewan) == $jenis->idjenis_hewan) ? 'selected' : '' }}>
-                                {{ $jenis->nama_jenis_hewan }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('idjenis_hewan')
+                    @error('nama_jenis_hewan')
                         <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
                     @enderror
                 </div>
@@ -85,7 +69,7 @@
         <!-- Warning Box -->
         <div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded" role="alert">
             <p class="font-bold">Peringatan:</p>
-            <p class="text-sm">Perubahan data ras hewan akan berpengaruh pada data hewan peliharaan yang terkait.</p>
+            <p class="text-sm">Perubahan data jenis hewan akan berpengaruh pada data hewan peliharaan yang terkait.</p>
         </div>
     </div>
 </div>
