@@ -121,9 +121,19 @@ class JenisHewanController extends Controller
     {
         return trim(ucwords(strtolower($nama)));
     }
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
-        $id = $request->param('id');
+        try {
+            // Query Builder
+            DB::table('jenis_hewan')
+                ->where('idjenis_hewan', $id)
+                ->delete();
 
+            return redirect()->route('admin.jenis-hewan.index')
+                            ->with('success', 'Jenis hewan berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.ras-hewan.index')
+                            ->with('error', 'Gagal menghapus jenis hewan: ' . $e->getMessage());
+        }
     }
 }

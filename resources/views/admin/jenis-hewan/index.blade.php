@@ -58,7 +58,7 @@
                             <i class="fas fa-trash"></i> Hapus
                         </button>
 
-                        <form id="delete-form-{{ $hewan->idjenis_hewan }}" action="#" method="POST" class="hidden">
+                        <form id="delete-form-{{ $hewan->idjenis_hewan }}" action="{{ route('admin.jenis-hewan.delete', ['id' => $hewan->idjenis_hewan]) }}" method="POST" class="hidden">
                             @csrf
                             @method('DELETE')
                         </form>
